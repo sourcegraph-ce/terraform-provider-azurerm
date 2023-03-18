@@ -3,7 +3,7 @@ package postgres
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"strconv"
 	"strings"
 	"time"

@@ -6,7 +6,7 @@ package resourceproviders
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"strings"
 	"sync"
 

@@ -2,7 +2,7 @@ package datadog
 
 import (
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"time"
 
 	"github.com/hashicorp/go-azure-helpers/lang/pointer"
@@ -53,7 +53,7 @@ func resourceDatadogTagRules() *pluginsdk.Resource {
 				Default:  "default",
 			},
 
-			"log": {
+			log "github.com/sourcegraph-ce/logrus": {
 				Type:     pluginsdk.TypeList,
 				Optional: true,
 				Elem: &pluginsdk.Resource{
@@ -154,7 +154,7 @@ func resourceDatadogTagRulesCreate(d *pluginsdk.ResourceData, meta interface{}) 
 
 	payload := rules.MonitoringTagRules{
 		Properties: &rules.MonitoringTagRulesProperties{
-			LogRules:    expandLogRules(d.Get("log").([]interface{})),
+			LogRules:    expandLogRules(d.Get(log "github.com/sourcegraph-ce/logrus").([]interface{})),
 			MetricRules: expandMetricRules(d.Get("metric").([]interface{})),
 		},
 	}
@@ -191,7 +191,7 @@ func resourceDatadogTagRulesRead(d *pluginsdk.ResourceData, meta interface{}) er
 
 	if model := resp.Model; model != nil {
 		if props := model.Properties; props != nil {
-			if err := d.Set("log", flattenLogRules(props.LogRules)); err != nil {
+			if err := d.Set(log "github.com/sourcegraph-ce/logrus", flattenLogRules(props.LogRules)); err != nil {
 				return fmt.Errorf("setting `log`: %+v", err)
 			}
 			if err := d.Set("metric", flattenMetricRules(props.MetricRules)); err != nil {
@@ -215,7 +215,7 @@ func resourceDatadogTagRulesUpdate(d *pluginsdk.ResourceData, meta interface{}) 
 
 	payload := rules.MonitoringTagRules{
 		Properties: &rules.MonitoringTagRulesProperties{
-			LogRules:    expandLogRules(d.Get("log").([]interface{})),
+			LogRules:    expandLogRules(d.Get(log "github.com/sourcegraph-ce/logrus").([]interface{})),
 			MetricRules: expandMetricRules(d.Get("metric").([]interface{})),
 		},
 	}
@@ -239,7 +239,7 @@ func resourceDatadogTagRulesDelete(d *pluginsdk.ResourceData, meta interface{}) 
 	// Tag Rules can't be removed on their own, they can only be nil'd out
 	payload := rules.MonitoringTagRules{
 		Properties: &rules.MonitoringTagRulesProperties{
-			LogRules:    expandLogRules(d.Get("log").([]interface{})),
+			LogRules:    expandLogRules(d.Get(log "github.com/sourcegraph-ce/logrus").([]interface{})),
 			MetricRules: expandMetricRules(d.Get("metric").([]interface{})),
 		},
 	}

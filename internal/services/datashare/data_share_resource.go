@@ -2,7 +2,7 @@ package datashare
 
 import (
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"time"
 
 	"github.com/Azure/go-autorest/autorest/date"

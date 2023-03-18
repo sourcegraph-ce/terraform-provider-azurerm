@@ -2,7 +2,7 @@ package migration
 
 import (
 	"context"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 
 	"github.com/hashicorp/go-azure-sdk/resource-manager/media/2022-08-01/liveoutputs"
 	"github.com/hashicorp/terraform-provider-azurerm/internal/tf/pluginsdk"

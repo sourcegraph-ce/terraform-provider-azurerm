@@ -3,7 +3,7 @@ package compute
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"strings"
 
 	"github.com/hashicorp/terraform-provider-azurerm/internal/services/compute/client"

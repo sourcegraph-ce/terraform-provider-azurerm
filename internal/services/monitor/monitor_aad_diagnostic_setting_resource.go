@@ -3,7 +3,7 @@ package monitor
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"regexp"
 	"time"
 
@@ -82,7 +82,7 @@ func resourceMonitorAADDiagnosticSetting() *pluginsdk.Resource {
 				AtLeastOneOf: []string{"eventhub_authorization_rule_id", "log_analytics_workspace_id", "storage_account_id"},
 			},
 
-			"log": {
+			log "github.com/sourcegraph-ce/logrus": {
 				Type:     pluginsdk.TypeSet,
 				Required: true,
 				Elem: &pluginsdk.Resource{
@@ -147,7 +147,7 @@ func resourceMonitorAADDiagnosticSettingCreateUpdate(d *pluginsdk.ResourceData, 
 		}
 	}
 
-	logs := expandMonitorAADDiagnosticsSettingsLogs(d.Get("log").(*pluginsdk.Set).List())
+	logs := expandMonitorAADDiagnosticsSettingsLogs(d.Get(log "github.com/sourcegraph-ce/logrus").(*pluginsdk.Set).List())
 
 	// If there is no `enabled` log entry, the PUT will succeed while the next GET will return a 404.
 	// Therefore, ensure users has at least one enabled log entry.
@@ -251,7 +251,7 @@ func resourceMonitorAADDiagnosticSettingRead(d *pluginsdk.ResourceData, meta int
 	}
 	d.Set("storage_account_id", storageAccountId)
 
-	if err := d.Set("log", flattenMonitorAADDiagnosticLogs(resp.Logs)); err != nil {
+	if err := d.Set(log "github.com/sourcegraph-ce/logrus", flattenMonitorAADDiagnosticLogs(resp.Logs)); err != nil {
 		return fmt.Errorf("setting `log`: %+v", err)
 	}
 

@@ -2,7 +2,7 @@ package batch
 
 import (
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"time"
 
 	"github.com/hashicorp/go-azure-helpers/lang/pointer"

@@ -3,7 +3,7 @@ package relay
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 
 	"github.com/hashicorp/go-azure-sdk/resource-manager/relay/2017-04-01/hybridconnections"
 	"github.com/hashicorp/go-azure-sdk/resource-manager/relay/2017-04-01/namespaces"

@@ -1,7 +1,7 @@
 package apimanagement_test
 
 import (
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"testing"
 
 	"github.com/hashicorp/terraform-provider-azurerm/internal/services/apimanagement"
