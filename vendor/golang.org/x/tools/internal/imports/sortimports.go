@@ -10,7 +10,7 @@ package imports
 import (
 	"go/ast"
 	"go/token"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"sort"
 	"strconv"
 )
