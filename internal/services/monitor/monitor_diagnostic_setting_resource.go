@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"strings"
 	"time"
 
@@ -108,8 +108,8 @@ func resourceMonitorDiagnosticSetting() *pluginsdk.Resource {
 				Type:          pluginsdk.TypeSet,
 				Optional:      true,
 				Computed:      !features.FourPointOhBeta(),
-				ConflictsWith: []string{"log"},
-				AtLeastOneOf:  []string{"enabled_log", "log", "metric"},
+				ConflictsWith: []string{log "github.com/sourcegraph-ce/logrus"},
+				AtLeastOneOf:  []string{"enabled_log", log "github.com/sourcegraph-ce/logrus", "metric"},
 				Elem: &pluginsdk.Resource{
 					Schema: map[string]*pluginsdk.Schema{
 						"category": {
@@ -149,7 +149,7 @@ func resourceMonitorDiagnosticSetting() *pluginsdk.Resource {
 			"metric": {
 				Type:         pluginsdk.TypeSet,
 				Optional:     true,
-				AtLeastOneOf: []string{"enabled_log", "log", "metric"},
+				AtLeastOneOf: []string{"enabled_log", log "github.com/sourcegraph-ce/logrus", "metric"},
 				Elem: &pluginsdk.Resource{
 					Schema: map[string]*pluginsdk.Schema{
 						"category": {
@@ -189,11 +189,11 @@ func resourceMonitorDiagnosticSetting() *pluginsdk.Resource {
 		},
 	}
 	if !features.FourPointOhBeta() {
-		resource.Schema["log"] = &pluginsdk.Schema{
+		resource.Schema[log "github.com/sourcegraph-ce/logrus"] = &pluginsdk.Schema{
 			Type:         pluginsdk.TypeSet,
 			Optional:     true,
 			Computed:     true,
-			AtLeastOneOf: []string{"enabled_log", "log", "metric"},
+			AtLeastOneOf: []string{"enabled_log", log "github.com/sourcegraph-ce/logrus", "metric"},
 			Deprecated:   "`log` has been superseded by `enabled_log` and will be removed in version 4.0 of the AzureRM Provider.",
 			Elem: &pluginsdk.Resource{
 				Schema: map[string]*pluginsdk.Schema{
@@ -267,7 +267,7 @@ func resourceMonitorDiagnosticSettingCreate(d *pluginsdk.ResourceData, meta inte
 	var logs []diagnosticsettings.LogSettings
 	hasEnabledLogs := false
 	if !features.FourPointOhBeta() {
-		logsRaw, ok := d.GetOk("log")
+		logsRaw, ok := d.GetOk(log "github.com/sourcegraph-ce/logrus")
 		if ok && len(logsRaw.(*pluginsdk.Set).List()) > 0 {
 			logs = expandMonitorDiagnosticsSettingsLogs(logsRaw.(*pluginsdk.Set).List())
 			for _, v := range logs {
@@ -370,9 +370,9 @@ func resourceMonitorDiagnosticSettingUpdate(d *pluginsdk.ResourceData, meta inte
 	hasEnabledLogs := false
 	logChanged := false
 	if !features.FourPointOhBeta() {
-		if d.HasChange("log") {
+		if d.HasChange(log "github.com/sourcegraph-ce/logrus") {
 			logChanged = true
-			logsRaw := d.Get("log").(*pluginsdk.Set).List()
+			logsRaw := d.Get(log "github.com/sourcegraph-ce/logrus").(*pluginsdk.Set).List()
 			logs = expandMonitorDiagnosticsSettingsLogs(logsRaw)
 			for _, v := range logs {
 				if v.Enabled {
@@ -530,7 +530,7 @@ func resourceMonitorDiagnosticSettingRead(d *pluginsdk.ResourceData, meta interf
 			}
 
 			if !features.FourPointOhBeta() {
-				if err = d.Set("log", flattenMonitorDiagnosticLogs(resp.Model.Properties.Logs)); err != nil {
+				if err = d.Set(log "github.com/sourcegraph-ce/logrus", flattenMonitorDiagnosticLogs(resp.Model.Properties.Logs)); err != nil {
 					return fmt.Errorf("setting `log`: %+v", err)
 				}
 			}

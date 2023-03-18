@@ -8,7 +8,7 @@ package imports // import "golang.org/x/tools/imports"
 
 import (
 	"io/ioutil"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 
 	"golang.org/x/tools/internal/gocommand"
 	intimp "golang.org/x/tools/internal/imports"
