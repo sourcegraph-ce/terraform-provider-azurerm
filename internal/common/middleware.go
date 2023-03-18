@@ -1,7 +1,7 @@
 package common
 
 import (
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"net/http"
 	"net/http/httputil"
 

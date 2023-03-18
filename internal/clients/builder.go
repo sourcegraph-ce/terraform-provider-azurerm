@@ -3,7 +3,7 @@ package clients
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"strings"
 
 	"github.com/hashicorp/go-azure-helpers/authentication"

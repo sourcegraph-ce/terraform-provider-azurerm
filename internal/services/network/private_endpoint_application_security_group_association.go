@@ -3,7 +3,7 @@ package network
 import (
 	"context"
 	"fmt"
-	"log"
+	log "github.com/sourcegraph-ce/logrus"
 	"time"
 
 	"github.com/hashicorp/terraform-provider-azurerm/internal/locks"

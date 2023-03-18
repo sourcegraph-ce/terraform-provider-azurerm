@@ -27,7 +27,7 @@ func parseActionType(input string) (*ActionType, error) {
 	vals := map[string]ActionType{
 		"allow":    ActionTypeAllow,
 		"block":    ActionTypeBlock,
-		"log":      ActionTypeLog,
+		log "github.com/sourcegraph-ce/logrus":      ActionTypeLog,
 		"redirect": ActionTypeRedirect,
 	}
 	if v, ok := vals[strings.ToLower(input)]; ok {
